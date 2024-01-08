@@ -19,6 +19,7 @@
             android:orientation="vertical"
             android:visibility="visible">
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/inboxTop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatImageView
@@ -38,7 +39,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Inbox"
+                    android:text="@string/inbox"
                     android:textSize="28sp"
                     android:layout_margin="10dp"
                     app:layout_constraintStart_toEndOf="@id/sideMenu"
@@ -77,7 +78,7 @@
                         android:inputType="text"
                         android:textColor="@color/toDark"
                         android:textSize="14sp"
-                        android:hint="Search"
+                        android:hint="@string/search"
                         android:textColorHint="@color/toDark"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -88,6 +89,49 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_sq_wh"
+                android:padding="10dp"
+                >
+                <ImageView
+                    android:id="@+id/churchLogo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/picture"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+                <TextView
+                    android:id="@+id/churchDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/toDark"
+                    android:text="@string/church_name"
+                    android:textSize="18sp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/churchLogo"
+                    app:layout_constraintTop_toTopOf="@+id/churchLogo"/>
+                <TextView
+                    android:id="@+id/lastTextDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/toDark"
+                    android:text="@string/last_sent_message"
+                    android:textSize="16sp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/churchLogo"
+                    app:layout_constraintBottom_toBottomOf="@+id/churchLogo"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/inboxSideMenuLV"
@@ -118,7 +162,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="User Name"
+                    android:text="@string/user_name"
                     android:textColor="@color/dark"
                     android:layout_margin="10dp"
                     android:textSize="18sp"
@@ -142,7 +186,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Church Members"
+                android:text="@string/church_members"
                 android:textColor="@color/toDark"
                 android:layout_margin="10dp"
                 android:textSize="16sp"
@@ -205,7 +249,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="Inbox"
+                android:text="@string/inbox"
                 android:textSize="18sp"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toEndOf="@id/inbox"

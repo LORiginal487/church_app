@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/toDark"
-            android:text="CHURCH NAME"
+            android:text="@string/church_name"
             android:textSize="24sp"
             app:layout_constraintWidth_percent="0.8"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="bottom|center_horizontal"
-                android:text="WELCOME"
+                android:text="@string/welcome"
                 android:textColor="@color/mid"
                 android:textSize="50sp" />
         </RelativeLayout>
@@ -76,7 +76,7 @@
             android:id="@+id/txLatestUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Recenty Posted"
+            android:text="@string/recenty_posted"
             android:layout_margin="10dp"
             android:textSize="20sp"
             android:textColor="@color/dark"/>
@@ -90,7 +90,7 @@
             android:id="@+id/txMostLiked"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Most Liked Posts"
+            android:text="@string/most_liked_posts"
             android:layout_margin="10dp"
             android:textSize="20sp"
             android:textColor="@color/dark"/>
@@ -105,7 +105,7 @@
             android:id="@+id/txYourFavs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your Favs"
+            android:text="@string/your_favs"
             android:layout_margin="10dp"
             android:textSize="20sp"
             android:textColor="@color/dark"/>
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="Home"
+                android:text="@string/home"
                 android:textSize="18sp"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toEndOf="@id/homeBtn"

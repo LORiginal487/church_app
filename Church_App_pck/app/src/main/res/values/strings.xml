@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Church App</string>
+    <string name="church_name">CHURCH NAME</string>
+    <string name="last_sent_message">Last sent message</string>
+    <string name="user_name">User Name</string>
+    <string name="church_members">Church Members</string>
+    <string name="inbox">Inbox</string>
+    <string name="search">Search</string>
+    <string name="recenty_posted">Recenty Posted</string>
+    <string name="welcome">WELCOME</string>
+    <string name="most_liked_posts">Most Liked Posts</string>
+    <string name="your_favs">Your Favs</string>
+    <string name="home">Home</string>
 </resources>
