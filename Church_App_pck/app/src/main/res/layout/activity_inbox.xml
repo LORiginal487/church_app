@@ -6,6 +6,157 @@
     android:layout_height="match_parent"
     android:background="@color/light"
     tools:context=".activity_inbox">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.93"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <LinearLayout
+            android:id="@+id/inboxLV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/sideMenu"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:clickable="true"
+                    android:onClick="openHome"
+                    android:padding="10dp"
+                    android:src="@drawable/menu_dots_vertical"
+                    android:tint="@color/dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Inbox"
+                    android:textSize="28sp"
+                    android:layout_margin="10dp"
+                    app:layout_constraintStart_toEndOf="@id/sideMenu"
+                    app:layout_constraintTop_toTopOf="@id/sideMenu"
+                    app:layout_constraintBottom_toBottomOf="@id/sideMenu"
+                    />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:padding="5dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_sq_lg"
+                    app:layout_constraintWidth_percent="0.9"
+                    app:layout_constraintTop_toBottomOf="@id/sideMenu"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/search"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:clickable="true"
+                        android:onClick="openHome"
+                        android:padding="10dp"
+                        android:src="@drawable/search"
+                        android:tint="@color/toDark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                    <EditText
+                        android:id="@+id/inSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="17"
+                        android:inputType="text"
+                        android:textColor="@color/toDark"
+                        android:textSize="14sp"
+                        android:hint="Search"
+                        android:textColorHint="@color/toDark"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/search"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/inboxSideMenuLV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="wrap_content"
+
+                >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/userPP"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:onClick="openHome"
+                android:padding="10dp"
+                android:background="@color/mid"
+                android:src="@drawable/user"
+                android:tint="@color/dark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Name"
+                    android:textColor="@color/dark"
+                    android:layout_margin="10dp"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@id/userPP"
+                    app:layout_constraintTop_toTopOf="@id/userPP"
+                    app:layout_constraintBottom_toBottomOf="@id/userPP"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/backToCh"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:clickable="true"
+                    android:onClick="openHome"
+                    android:padding="10dp"
+                    android:src="@drawable/angleright"
+                    android:tint="@color/dark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Church Members"
+                android:textColor="@color/toDark"
+                android:layout_margin="10dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/userPP"
+                app:layout_constraintTop_toTopOf="@id/userPP"
+                app:layout_constraintBottom_toBottomOf="@id/userPP"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/home_B_L"
         android:layout_width="match_parent"
