@@ -17,4 +17,20 @@
     <string name="apps">Apps</string>
     <string name="settings">Settings</string>
     <string name="location">Location</string>
+    <string name="phone_number">PHONE NUMBER</string>
+    <string name="password">PASSWORD</string>
+    <string name="please_sign_in">Please Sign In</string>
+    <string name="sign_in">Sign In</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign Up!</string>
+    <string name="forgot_password_reset_password">Forgot Password? Reset Password!</string>
+    <string name="please_sign_up">Please Sign Up</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">CONFIRM PASSWORD</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="title">Title</string>
+    <string name="role">Role</string>
+    <string name="need_help">Need Help?</string>
+    <string name="have_an_account_sign_in">Have An Account? Sign In!</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

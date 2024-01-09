@@ -21,7 +21,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/inboxTop"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/mid"
+                android:paddingBottom="10dp">
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/sideMenu"
                     android:layout_width="40dp"
@@ -31,7 +33,7 @@
                     android:onClick="OpenSideMenu"
                     android:padding="10dp"
                     android:src="@drawable/menu_dots_vertical"
-                    android:tint="@color/dark"
+                    android:tint="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
@@ -42,6 +44,7 @@
                     android:text="@string/inbox"
                     android:textSize="28sp"
                     android:layout_margin="10dp"
+                    android:textColor="@color/white"
                     app:layout_constraintStart_toEndOf="@id/sideMenu"
                     app:layout_constraintTop_toTopOf="@id/sideMenu"
                     app:layout_constraintBottom_toBottomOf="@id/sideMenu"
@@ -50,7 +53,7 @@
                     android:layout_width="0dp"
                     android:padding="5dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_sq_lg"
+                    android:background="@drawable/rounded_sq_wh"
                     app:layout_constraintWidth_percent="0.9"
                     app:layout_constraintTop_toBottomOf="@id/sideMenu"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +67,7 @@
                         android:onClick="openHome"
                         android:padding="10dp"
                         android:src="@drawable/search"
-                        android:tint="@color/toDark"
+                        android:tint="@color/dark"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:ems="17"
                         android:inputType="text"
-                        android:textColor="@color/toDark"
+                        android:textColor="@color/dark"
                         android:textSize="14sp"
                         android:hint="@string/search"
                         android:textColorHint="@color/toDark"
@@ -93,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/rounded_sq_wh"
+                android:background="@color/toLight"
                 android:padding="10dp"
                 >
                 <ImageView
