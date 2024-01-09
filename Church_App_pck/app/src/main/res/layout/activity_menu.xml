@@ -4,7 +4,231 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light"
     tools:context=".activity_menu">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_T_L"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        tools:layout_editor_absoluteX="1dp">
+
+
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/toDark"
+            android:text="@string/apps"
+            android:textSize="24sp"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/Linear1apps"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.5"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_T_L">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="OpenBible"
+            android:padding="10dp"
+            android:background="@drawable/rounded_sq2_wh"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/BibleLogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:onClick="openHome"
+
+                android:src="@drawable/book_open_cover"
+                android:tint="@color/toDark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/toDark"
+                android:text="Bible"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@+id/BibleLogo"
+                app:layout_constraintBottom_toBottomOf="@+id/BibleLogo"
+                app:layout_constraintTop_toTopOf="@+id/BibleLogo"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="OpenCalender"
+            android:padding="10dp"
+            android:background="@drawable/rounded_sq2_wh"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/calenderLogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:onClick="openHome"
+
+                android:src="@drawable/calendar_1"
+                android:tint="@color/toDark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/toDark"
+                android:text="Calender"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@+id/calenderLogo"
+                app:layout_constraintBottom_toBottomOf="@+id/calenderLogo"
+                app:layout_constraintTop_toTopOf="@+id/calenderLogo"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.5"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_T_L">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="OpenNotes"
+            android:padding="10dp"
+            android:background="@drawable/rounded_sq2_wh"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/notesLogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:onClick="openHome"
+
+                android:src="@drawable/notebook"
+                android:tint="@color/toDark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/toDark"
+                android:text="Notes"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@+id/notesLogo"
+                app:layout_constraintBottom_toBottomOf="@+id/notesLogo"
+                app:layout_constraintTop_toTopOf="@+id/notesLogo"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:clickable="true"
+            android:onClick="OpenLocation"
+            android:background="@drawable/rounded_sq2_wh"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/churchLocationLogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:onClick="openHome"
+
+                android:src="@drawable/home_location"
+                android:tint="@color/toDark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/toDark"
+                android:text="@string/location"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@+id/churchLocationLogo"
+                app:layout_constraintBottom_toBottomOf="@+id/churchLocationLogo"
+                app:layout_constraintTop_toTopOf="@+id/churchLocationLogo"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Linear1apps">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:clickable="true"
+            android:onClick="OpenSettings"
+            android:background="@drawable/rounded_sq2_wh"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/settings"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:onClick="openHome"
+
+                android:src="@drawable/settings"
+                android:tint="@color/toDark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/toDark"
+                android:text="@string/settings"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@+id/settings"
+                app:layout_constraintBottom_toBottomOf="@+id/settings"
+                app:layout_constraintTop_toTopOf="@+id/settings"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/home_B_L"
         android:layout_width="match_parent"
@@ -21,7 +245,7 @@
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:clickable="true"
-            android:onClick="openHome"
+            android:onClick="OpenHome"
             android:padding="5dp"
             android:src="@drawable/home"
             android:tint="@color/dark"
@@ -34,7 +258,7 @@
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:clickable="true"
-            android:onClick="openHome"
+            android:onClick="OpenInbox"
             android:padding="5dp"
             android:src="@drawable/chat"
             android:tint="@color/dark"
@@ -49,7 +273,7 @@
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:clickable="true"
-            android:onClick="openHome"
+            android:onClick="OpenProfile"
             android:padding="5dp"
             android:src="@drawable/user"
             android:tint="@color/dark"
@@ -60,16 +284,18 @@
             android:layout_width="wrap_content"
             android:padding="5dp"
             android:layout_height="50dp"
+            android:clickable="true"
+            android:onClick="OpenApps"
             android:background="@drawable/rounded_sq_ora"
             >
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/menu"
+                android:id="@+id/more"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:onClick="openHome"
                 android:padding="10dp"
-                android:src="@drawable/menu_dots_h"
+                android:src="@drawable/apps_pressed"
                 android:tint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -79,10 +305,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="Menu"
+                android:text="@string/more"
                 android:textSize="18sp"
                 android:layout_marginEnd="5dp"
-                app:layout_constraintStart_toEndOf="@id/menu"
+                app:layout_constraintStart_toEndOf="@id/more"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
