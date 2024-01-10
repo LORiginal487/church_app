@@ -96,8 +96,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/toLight"
                 android:padding="10dp"
+                android:clickable="true"
+                android:onClick="OpenChat"
                 >
                 <ImageView
                     android:id="@+id/churchLogo"
@@ -138,12 +139,13 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/inboxSideMenuLV"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@color/toLight"
             android:visibility="gone">
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:padding="5dp"
                 android:layout_height="wrap_content"
 
@@ -163,10 +165,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 />
                 <TextView
+                    android:id="@+id/usernameTx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/user_name"
-                    android:textColor="@color/dark"
+                    android:textColor="@color/white"
                     android:layout_margin="10dp"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@id/userPP"
@@ -176,21 +179,22 @@
                     android:id="@+id/backToCh"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="10dp"
+                    android:layout_marginStart="20dp"
                     android:clickable="true"
-                    android:onClick="openHome"
+                    android:onClick="BackToInboxLL"
                     android:padding="10dp"
                     android:src="@drawable/angleright"
-                    android:tint="@color/dark"
+                    android:tint="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/usernameTx"
+                    app:layout_constraintTop_toTopOf="@+id/userPP"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/church_members"
-                android:textColor="@color/toDark"
+                android:textColor="@color/white"
                 android:layout_margin="10dp"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/userPP"
@@ -241,7 +245,7 @@
                 android:id="@+id/inbox"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:clickable="true"
+
                 android:padding="10dp"
                 android:src="@drawable/chat_pressed"
                 android:tint="@color/white"

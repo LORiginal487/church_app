@@ -33,4 +33,10 @@
     <string name="need_help">Need Help?</string>
     <string name="have_an_account_sign_in">Have An Account? Sign In!</string>
     <string name="sign_up">Sign Up</string>
+    <string name="your_recent_notes">Your Recent Notes</string>
+    <string name="notes">Notes</string>
+    <string name="all_shuffled_notes">All Shuffled Notes</string>
+    <string name="note">Note</string>
+    <string name="message">Message...</string>
+    <string name="ok_livhu">ok livhu</string>
 </resources>

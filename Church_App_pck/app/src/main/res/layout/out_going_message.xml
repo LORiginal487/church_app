@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:paddingStart="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bubble_out"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="@string/ok_livhu"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/outTextV"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/outTimeV"
+        app:layout_constraintTop_toBottomOf="@+id/outTextV"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

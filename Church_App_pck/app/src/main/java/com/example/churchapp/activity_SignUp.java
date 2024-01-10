@@ -15,6 +15,7 @@ public class activity_SignUp extends AppCompatActivity {
     }
 
     public void ShowTitles(View view) {
+
     }
 
     public void ShowRoles(View view) {

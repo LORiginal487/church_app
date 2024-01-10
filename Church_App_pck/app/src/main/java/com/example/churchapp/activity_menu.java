@@ -37,6 +37,8 @@ public class activity_menu extends AppCompatActivity {
     }
 
     public void OpenNotes(View view) {
+        Intent intent = new Intent(getApplicationContext(), activity_notes.class);
+        startActivity(intent);
     }
 
     public void OpenCalender(View view) {
@@ -46,5 +48,10 @@ public class activity_menu extends AppCompatActivity {
     }
 
     public void OpenLocation(View view) {
+    }
+
+    public void LogOut(View view) {
+        Intent intent = new Intent(getApplicationContext(), activity_SignIn.class);
+        startActivity(intent);
     }
 }
