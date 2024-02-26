@@ -11,8 +11,7 @@
         <LinearLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.09"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="5dp"
             android:gravity="start|center_vertical"
@@ -28,16 +27,19 @@
                 android:clickable="true"
                 android:onClick="go2inbox"
                 app:riv_oval="true" />
+
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imagePP"
                 android:layout_width="0dp"
-                android:layout_weight="0.1"                android:layout_height="50dp"
+                android:layout_height="40dp"
+                android:layout_weight="0.1"
                 android:background="@drawable/circleback"
                 android:scaleType="centerCrop"
                 app:riv_oval="true" />
             <TextView
                 android:id="@+id/chatName"
                 android:layout_width="0dp"
+                android:height="50dp"
                 android:layout_weight="0.6"                android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:textColor="@color/toDark"
@@ -74,6 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.83"
+            android:paddingTop="10dp"
             >
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleVchat"
@@ -94,12 +97,11 @@
         <LinearLayout
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/white"
             android:gravity="center|center_vertical"
             android:orientation="horizontal"
-            android:layout_weight="0.08"
 
             >
             <androidx.appcompat.widget.AppCompatImageView
