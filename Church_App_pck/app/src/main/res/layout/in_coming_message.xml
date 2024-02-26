@@ -26,7 +26,7 @@
         android:background="@drawable/bubble_in"
         android:padding="10dp"
         android:text="@string/ok_livhu"
-        android:textColor="@color/white"
+        android:textColor="@color/toDark"
         android:id="@+id/inTextV"
         app:layout_constraintTop_toBottomOf="@id/senderName"
         app:layout_constraintStart_toEndOf="@+id/sendaPP"
