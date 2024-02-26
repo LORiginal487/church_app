@@ -14,35 +14,60 @@
             android:layout_height="0dp"
             android:layout_weight="0.09"
             android:background="@color/white"
+            android:padding="5dp"
             android:gravity="start|center_vertical"
             android:orientation="horizontal">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/backBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="40dp"
                 android:src="@drawable/anglesmallleftttt"
                 android:tint="@color/mid2"
-                android:layout_margin="10dp"
+
                 android:clickable="true"
                 android:onClick="go2inbox"
                 app:riv_oval="true" />
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imagePP"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"                android:layout_height="50dp"
                 android:background="@drawable/circleback"
                 android:scaleType="centerCrop"
                 app:riv_oval="true" />
             <TextView
                 android:id="@+id/chatName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"                android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:textColor="@color/toDark"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:textSize="20sp"
                 />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/call"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="40dp"
+                android:padding="3dp"
+                android:src="@drawable/phone"
+                android:tint="@color/mid2"
+
+                android:clickable="true"
+                android:onClick="go2inbox"
+                app:riv_oval="true" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/sideMenu"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="40dp"
+                android:padding="4dp"
+                android:src="@drawable/menu_dots_vertical"
+                android:tint="@color/mid2"
+
+                android:clickable="true"
+                android:onClick="go2inbox"
+                app:riv_oval="true" />
 
         </LinearLayout>
         <RelativeLayout
