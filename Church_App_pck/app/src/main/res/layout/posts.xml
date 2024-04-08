@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/post_basic_shape"
+    android:padding="20dp"
+    android:layout_marginTop="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/posterPP"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:background="@drawable/circleback"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dots"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/menu_dots_vertical"
+        android:padding="15dp"
+        android:tint="@color/white"
+        android:clickable="true"
+        android:onClick="addPostNow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/posterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/posterPP"
+        app:layout_constraintEnd_toStartOf="@id/dots"
+        app:layout_constraintTop_toTopOf="@id/dots"
+        app:layout_constraintBottom_toBottomOf="@id/posterPP"
+        />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/menuPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/black"
+        android:gravity="start"
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_margin="2dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"/>
+        <TextView
+            android:id="@+id/editbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="edit"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:layout_margin="2dp"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/timePosted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/likeBtn"
+        app:layout_constraintEnd_toStartOf="@id/commentBtn"
+        app:layout_constraintTop_toTopOf="@+id/likeBtn"
+        app:layout_constraintBottom_toBottomOf="@id/likeBtn"/>
+
+
+        <TextView
+            android:id="@+id/txtPOSTED"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/common_signin_button_text_long"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:layout_margin="5dp"
+            android:background="@color/mid"
+            android:scaleType="centerCrop"
+            app:riv_oval="true"
+            app:layout_constraintTop_toBottomOf="@+id/posterPP"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/likeBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/heart"
+        android:tint="@color/white"
+        app:riv_oval="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPOSTED"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/likedBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/heart"
+        android:tint="@color/mid"
+        android:visibility="gone"
+        app:riv_oval="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPOSTED"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/commentBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:src="@drawable/commentd3"
+        android:tint="@color/white"
+        app:riv_oval="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPOSTED"/>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

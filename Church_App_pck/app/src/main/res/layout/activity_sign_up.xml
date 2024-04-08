@@ -42,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txSignIn"
@@ -84,6 +85,7 @@
                 android:inputType="text"
                 android:background="@drawable/clear_bg"
                 />
+
         </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
@@ -116,6 +118,7 @@
                     />
             </RelativeLayout>
         </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/titleRL"
@@ -154,20 +157,76 @@
                             android:id="@+id/mrRB"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Mr"/>
+                            android:text="@string/mr"/>
                         <RadioButton
                             android:id="@+id/missRB"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Miss"/>
+                            android:text="@string/miss"/>
                         <RadioButton
                             android:id="@+id/mrsRB"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Mrs"/>
+                            android:text="@string/mrs"/>
+                        <RadioButton
+                            android:id="@+id/noneRB1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/none"/>
                     </RadioGroup>
                 </RelativeLayout>
             </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/genderRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/rounded_sq_lg2"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_sq_wh"
+                android:padding="10dp"
+                android:clickable="true"
+                android:onClick="ShowTitles"
+                >
+                <TextView
+                    android:id="@+id/genderIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/gender"
+                    android:visibility="visible"
+                    android:textColor="@color/toDark"
+                    android:background="@drawable/clear_bg"
+                    />
+                <RadioGroup
+                    android:id="@+id/genderGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                    <RadioButton
+                        android:id="@+id/femaleRB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/female"/>
+                    <RadioButton
+                        android:id="@+id/maleRB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male"/>
+                    <RadioButton
+                        android:id="@+id/noneRB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/none"/>
+                </RadioGroup>
+            </RelativeLayout>
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/phoneRL"
             android:layout_width="match_parent"
@@ -252,6 +311,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="0"
+
                     android:hint="@string/confirm_password"
                     android:textColorHint="@color/toDark"
                     android:textColor="@color/toDark"
@@ -357,19 +417,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:padding="5dp"
             android:clickable="true"
             android:onClick="SignUp"
             android:gravity="center"
             android:background="@drawable/rounded_sq_ora"
             >
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/unlockLogo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="10dp"
-                android:src="@drawable/home"
-                android:tint="@color/toDark"
-                />
 
             <TextView
 
@@ -389,7 +442,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/have_an_account_sign_in"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:gravity="center"
         android:layout_margin="10dp"
         android:textColor="@color/dark"
@@ -404,7 +457,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/need_help"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:gravity="center"
         android:layout_margin="10dp"
         android:textColor="@color/dark"

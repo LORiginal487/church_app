@@ -39,4 +39,10 @@
     <string name="note">Note</string>
     <string name="message">Message...</string>
     <string name="ok_livhu">ok livhu</string>
+    <string name="mr">Mr</string>
+    <string name="miss">Miss</string>
+    <string name="mrs">Mrs</string>
+    <string name="none">none</string>
+    <string name="female">female</string>
+    <string name="male">male</string>
 </resources>
