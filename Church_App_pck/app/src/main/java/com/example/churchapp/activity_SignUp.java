@@ -41,7 +41,7 @@ public class activity_SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         //-0-----------------------
-        databaseMethods = new Database_Methods();
+        databaseMethods = new Database_Methods(getApplicationContext());
         Log.d("l4 1111111", "_______________");
         user = new User();
         Log.d("l4 1111111", "_______________2");
@@ -114,14 +114,13 @@ public class activity_SignUp extends AppCompatActivity {
         user.bckGndP = "------";
         user.image = "---------";
         user.dob = "-------------";
-        int userCount = databaseMethods.getCountOfUsers();
-        user.idNum = "48700000"+"-"+userCount;
 
 
 
 
-        databaseMethods.addUser(user, getApplicationContext());
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+        databaseMethods.addUser(user);
+        Intent intent = new Intent(getApplicationContext(), activity_SignIn.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 

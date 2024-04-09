@@ -62,8 +62,8 @@ public class activity_notes extends AppCompatActivity {
         });
     }
 
-    public void OpenNotes(View view) {
-        Intent intent = new Intent(getApplicationContext(), activity_notes.class);
+    public void OpenMenu(View view) {
+        Intent intent = new Intent(getApplicationContext(), activity_menu.class);
         startActivity(intent);
     }
 }

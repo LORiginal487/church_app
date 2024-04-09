@@ -152,11 +152,21 @@
 
 
     </RelativeLayout>
+    <TextView
+        android:id="@+id/errorSi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="10sp"
+        android:textColor="@color/red"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/passwordRL"
+        app:layout_constraintStart_toStartOf="parent"/>
     <LinearLayout
         android:id="@+id/signInBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="30dp"
+
         android:orientation="horizontal"
         android:clickable="true"
         android:onClick="SignIn"
@@ -164,7 +174,7 @@
         android:background="@drawable/rounded_sq_ora"
         app:layout_constraintWidth_percent="0.8"
         app:layout_constraintHeight_percent=".07"
-        app:layout_constraintTop_toBottomOf="@id/passwordRL"
+        app:layout_constraintTop_toBottomOf="@id/errorSi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <androidx.appcompat.widget.AppCompatImageView

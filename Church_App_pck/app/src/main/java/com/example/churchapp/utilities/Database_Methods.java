@@ -14,7 +14,9 @@ import com.example.churchapp.activity_SignUp;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
@@ -22,9 +24,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Database_Methods {
-    FirebaseFirestore db= FirebaseFirestore.getInstance();
-    CollectionReference usersCol = db.collection(Constants.Key_Collection_Users);
-    public void addUser(User user, Context context){
+    private FirebaseFirestore db;
+    private Context context;
+    CollectionReference usersCol;
+    public Database_Methods(Context context){
+        this.context = context;
+        db= FirebaseFirestore.getInstance();
+        usersCol = db.collection(Constants.Key_Collection_Users);
+    }
+    public void addUser(User user){
         //add user to db
         Map<String, Object> userMp = new HashMap<>();
         userMp.put(Constants.Key_Name, user.name);
@@ -38,17 +46,30 @@ public class Database_Methods {
         userMp.put(Constants.Key_Title, user.title);
         userMp.put(Constants.Key_Gender, user.gender);
         userMp.put(Constants.Key_Role, user.role);
-        userMp.put(Constants.Key_Id, user.idNum);
         userMp.put(Constants.Key_Dob, user.dob);
         userMp.put(Constants.Key_Email, user.email);
 
         // Add a new document with a generated ID
 
-        usersCol.document(user.idNum).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+        usersCol.add(userMp).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
-            public void onSuccess(Void unused) {
-                showToast("opened", context);
+            public void onSuccess(DocumentReference documentReference) {
+                String generatedId = documentReference.getId(); // Get the Firestore-generated ID
+                // Add the generated ID as a field in the user data
+                userMp.put(Constants.Key_Id, generatedId);
 
+                // Update the document with the generated ID as a field
+                documentReference.update(userMp).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        showToast("opened", context);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        showToast("not opened" + e.getMessage(), context);
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -57,27 +78,42 @@ public class Database_Methods {
             }
         });
     }
-    public int getCountOfUsers(){
-        final int[] count = {0}; // Initializing count to 0
+    public void getUserByString(String key, String value, final FirestoreListenerUser listener){
+        //get user by their phone
+        usersCol.whereEqualTo(key, value)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                             // Pass the retrieved user to the listener
+                            User user = new User();
+                            user.name = document.getString(Constants.Key_Name);
+                            user.email = document.getString(Constants.Key_Email);
+                            user.phone = document.getString(Constants.Key_Phone);
+                            user.password = document.getString(Constants.Key_Password);
+                            user.church = document.getString(Constants.Key_Church);
+                            user.surname = document.getString(Constants.Key_Surname);
+                            user.role = document.getString(Constants.Key_Role);
+                            user.gender = document.getString(Constants.Key_Gender);
+                            user.title = document.getString(Constants.Key_Title);
+                            user.bio = document.getString(Constants.Key_Bio);
+                            user.bckGndP = document.getString(Constants.Key_BackgroundPic);
+                            user.image = document.getString(Constants.Key_Image);
+                            user.dob = document.getString(Constants.Key_Dob);
+                            user.idNum = document.getString(Constants.Key_Id);
+                            listener.onSuccess(user);
+                        }
+                    } else {
+                        Log.d("TAG", "Error getting user: ", task.getException());
+                        listener.onFailure("Error getting user reTry");
+                    }
+                });
 
+    }
+    public interface FirestoreListenerUser {
+        void onSuccess(User user);
 
-
-        // Retrieve all documents in the collection
-        usersCol.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                // Count the number of documents returned
-                count[0] = queryDocumentSnapshots.size();
-                Log.d("DocumentCount", "Number of users: " + count[0]);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("DocumentCount", "Error getting documents: " + e.getMessage());
-            }
-        });
-
-        return count[0];
+        void onFailure(String errorMessage);
     }
     public User getUserByID(String id){
         //get user by their id

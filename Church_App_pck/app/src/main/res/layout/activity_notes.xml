@@ -36,7 +36,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:clickable="true"
-            android:onClick="OpenNotes"
+            android:onClick="OpenMenu"
             android:padding="10dp"
             android:src="@drawable/angleleft"
             android:tint="@color/white"

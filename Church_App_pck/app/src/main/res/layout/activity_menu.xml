@@ -277,7 +277,7 @@
             android:onClick="OpenHome"
             android:padding="5dp"
             android:src="@drawable/home"
-            android:tint="@color/dark"
+            android:tint="@color/toDark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -289,8 +289,8 @@
             android:clickable="true"
             android:onClick="OpenInbox"
             android:padding="5dp"
-            android:src="@drawable/chat"
-            android:tint="@color/dark"
+            android:src="@drawable/chat22"
+            android:tint="@color/toDark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -305,7 +305,20 @@
             android:onClick="OpenProfile"
             android:padding="5dp"
             android:src="@drawable/user"
-            android:tint="@color/dark"
+            android:tint="@color/toDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/noti"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:onClick="OpenNoti"
+            android:padding="5dp"
+            android:src="@drawable/bell"
+            android:tint="@color/toDark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
