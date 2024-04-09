@@ -48,15 +48,19 @@
         app:layout_constraintTop_toBottomOf="@id/txSignIn"
         android:textColor="@color/red"
         android:textSize="20sp"/>
+    <ScrollView
+        android:id="@+id/scrolll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent=".77"
+        app:layout_constraintTop_toBottomOf="@+id/errorSU">
 
     <LinearLayout
         android:id="@+id/questionsL"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_margin="15dp"
-        app:layout_constraintHeight_percent=".7"
-        app:layout_constraintTop_toBottomOf="@+id/errorSU">
+        android:layout_margin="15dp">
         <RelativeLayout
             android:id="@+id/nameRL"
             android:layout_width="match_parent"
@@ -145,6 +149,8 @@
                         android:textSize="18sp"
                         android:text="@string/title"
                         android:visibility="visible"
+                        android:clickable="true"
+                        android:onClick="addTitle"
                         android:textColor="@color/toDark"
                         android:background="@drawable/clear_bg"
                         />
@@ -202,6 +208,8 @@
                     android:text="@string/gender"
                     android:visibility="visible"
                     android:textColor="@color/toDark"
+                    android:clickable="true"
+                    android:onClick="addGender"
                     android:background="@drawable/clear_bg"
                     />
                 <RadioGroup
@@ -346,6 +354,8 @@
                     android:textSize="18sp"
                     android:text="@string/role"
                     android:textColor="@color/toDark"
+                    android:clickable="true"
+                    android:onClick="addRole"
                     android:background="@drawable/clear_bg"
                     />
                 <RadioGroup
@@ -357,17 +367,17 @@
                         android:id="@+id/pastorRB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Pastor"/>
+                        android:text="@string/pastor"/>
                     <RadioButton
                         android:id="@+id/assistanceRB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Assistance"/>
+                        android:text="@string/assistance"/>
                     <RadioButton
                         android:id="@+id/memberRB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Member"/>
+                        android:text="@string/member"/>
                 </RadioGroup>
             </RelativeLayout>
         </RelativeLayout>
@@ -427,7 +437,7 @@
             <TextView
 
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/sign_up"
                 android:textSize="24sp"
                 android:gravity="center"
@@ -436,6 +446,7 @@
         </LinearLayout>
 
     </LinearLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/signInBtn"
@@ -448,7 +459,7 @@
         android:textColor="@color/dark"
         android:clickable="true"
         android:onClick="OpenSignIn"
-        app:layout_constraintTop_toBottomOf="@id/questionsL"
+        app:layout_constraintTop_toBottomOf="@id/scrolll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />

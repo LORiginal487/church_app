@@ -97,6 +97,15 @@ public class Constants {
     public static final String Key_Confirm_Not = "You Are Now Friends";
 
 
-
+    public static final String Key_Pastor = "Pastor";
+    public static final String Key_Assistance = "Assistance";
+    public static final String Key_Member = "Member";
+    public static final String Key_Mr = "Mr";
+    public static final String Key_Mrs = "Mrs";
+    public static final String Key_Miss = "Miss";
+    public static final String Key_Male = "Male";
+    public static final String Key_Female = "Female";
+    public static final String Key_None = "None";
+    //public static final String Key_Mrs = "Audience";
 
 }

@@ -45,4 +45,7 @@
     <string name="none">none</string>
     <string name="female">female</string>
     <string name="male">male</string>
+    <string name="pastor">Pastor</string>
+    <string name="assistance">Assistance</string>
+    <string name="member">Member</string>
 </resources>
