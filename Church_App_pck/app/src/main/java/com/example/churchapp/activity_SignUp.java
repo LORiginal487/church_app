@@ -1,9 +1,16 @@
 package com.example.churchapp;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,17 +27,24 @@ import com.example.churchapp.utilities.Database_Methods;
 import com.example.churchapp.utilities.ManagePreferences;
 import com.example.churchapp.utilities.User;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 public class activity_SignUp extends AppCompatActivity {
     private String image;
 
     EditText name_in, surname_in, phone_in_c, passw_in, passw_in_c, church_in;
     String name, surname, email, password, phone, church, role, gender, title;
     RadioGroup titleGroup, genderGroup, roleGroup;
-    TextView addImg, roleTxt, genderTxt, titleTxt;
+    TextView addImg, roleTxt, genderTxt, titleTxt,errorSU;
     LinearLayout signUp_btn;
     ProgressBar loadingProgressBar;
     ImageView imageProf;
     Database_Methods databaseMethods;
+    ImageView pic2add;
+
+    Boolean addImage = false;
+    Uri imageUri2;
     User user;
     ManagePreferences managePreferences;
     int mr, mrs, miss, male, female, none,none1, pastor, assistance, member;
@@ -65,6 +79,9 @@ public class activity_SignUp extends AppCompatActivity {
         roleTxt = findViewById(R.id.roleIn);
         genderTxt = findViewById(R.id.genderIn);
         titleTxt = findViewById(R.id.titleIn);
+        pic2add = findViewById(R.id.myPP);
+        addImg = findViewById(R.id.addPPtxt);
+        errorSU = findViewById(R.id.errorSU);
 
         member = R.id.memberRB;
         assistance = R.id.assistanceRB;
@@ -100,29 +117,42 @@ public class activity_SignUp extends AppCompatActivity {
         phone = phone_in_c.getText().toString();
         password = passw_in.getText().toString();
         church = church_in.getText().toString();
+        if (validate()){
+            user.name = name;
+            user.email = "email";
+            user.phone = phone;
+            user.password = password;
+            user.church = church;
+            user.surname = surname;
+            user.role = role;
+            user.gender = gender;
+            user.title = title;
+            user.bio = "----";
+            user.bckGndP = "------";
+            databaseMethods.getImage(imageUri2, new Database_Methods.FirestoreListenerGetImage() {
+                @Override
+                public void onSuccess(String image) {
+                    user.image = image;
+                    databaseMethods.addUser(user);
+                    Intent intent = new Intent(getApplicationContext(), activity_SignIn.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
 
-        user.name = name;
-        user.email = "email";
-        user.phone = phone;
-        user.password = password;
-        user.church = church;
-        user.surname = surname;
-        user.role = role;
-        user.gender = gender;
-        user.title = title;
-        user.bio = "----";
-        user.bckGndP = "------";
-        user.image = "---------";
-        user.dob = "-------------";
+                @Override
+                public void onFailure(String errorMessage) {
+                    errorSU.setVisibility(View.VISIBLE);
+                    errorSU.setText(errorMessage);
+
+                }
+            });
+
+        }
 
 
 
 
 
-        databaseMethods.addUser(user);
-        Intent intent = new Intent(getApplicationContext(), activity_SignIn.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
 
     }
     private boolean available(){
@@ -245,4 +275,75 @@ public class activity_SignUp extends AppCompatActivity {
         roleTxt.setVisibility(View.INVISIBLE);
 
     }
+    private Boolean validate(){
+        errorSU.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(name)) {
+            errorSU.setText("Please provide a name");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(surname)) {
+            errorSU.setText("Please provide a surname");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            errorSU.setText("Please provide a password");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(phone)) {
+            errorSU.setText("Please provide a phone number");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(title)) {
+            errorSU.setText("Please provide a title");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(gender)) {
+            errorSU.setText("Please provide a gender");
+            return false;
+        }
+
+        if (imageUri2 == null) {
+            errorSU.setText("Please add a picture");
+            return false;
+        }
+        return true;
+    }
+
+    public void addApp(View view) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        pickImage.launch(intent);
+    }
+    private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result ->{
+                if(result.getResultCode()==RESULT_OK){
+                    if(result.getData() != null){
+                        Uri imgUri = result.getData().getData();
+                        Log.d("11111111111111111", "-----"+imgUri.toString());
+                        imageUri2 =imgUri;
+                        addImage = true;
+                        databaseMethods.uploadAnImage(imgUri, Constants.Key_Type_Image_PP);
+
+                        try {
+                            InputStream inputStream = getContentResolver().openInputStream(imgUri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+                            pic2add.setVisibility(View.VISIBLE);
+                            addImg.setVisibility(View.GONE);
+                            pic2add.setImageBitmap(bitmap);
+                        }catch (FileNotFoundException e){
+                            errorSU.setVisibility(View.VISIBLE);
+                            errorSU.setText("please try that again");
+                        }
+//
+                    }
+                }
+            });
+
 }

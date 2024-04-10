@@ -4,6 +4,7 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,7 +19,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +31,14 @@ import java.util.Map;
 public class Database_Methods {
     private FirebaseFirestore db;
     private Context context;
-    CollectionReference usersCol;
+    FirebaseStorage storage1;
+    CollectionReference usersCol, postsCol;
     public Database_Methods(Context context){
         this.context = context;
         db= FirebaseFirestore.getInstance();
+        storage1 = FirebaseStorage.getInstance();
         usersCol = db.collection(Constants.Key_Collection_Users);
+        postsCol = db.collection(Constants.Key_Collection_Posts);
     }
     public void addUser(User user){
         //add user to db
@@ -46,7 +54,6 @@ public class Database_Methods {
         userMp.put(Constants.Key_Title, user.title);
         userMp.put(Constants.Key_Gender, user.gender);
         userMp.put(Constants.Key_Role, user.role);
-        userMp.put(Constants.Key_Dob, user.dob);
         userMp.put(Constants.Key_Email, user.email);
 
         // Add a new document with a generated ID
@@ -56,6 +63,9 @@ public class Database_Methods {
             public void onSuccess(DocumentReference documentReference) {
                 String generatedId = documentReference.getId(); // Get the Firestore-generated ID
                 // Add the generated ID as a field in the user data
+                /*
+
+                 */
                 userMp.put(Constants.Key_Id, generatedId);
 
                 // Update the document with the generated ID as a field
@@ -99,7 +109,6 @@ public class Database_Methods {
                             user.bio = document.getString(Constants.Key_Bio);
                             user.bckGndP = document.getString(Constants.Key_BackgroundPic);
                             user.image = document.getString(Constants.Key_Image);
-                            user.dob = document.getString(Constants.Key_Dob);
                             user.idNum = document.getString(Constants.Key_Id);
                             listener.onSuccess(user);
                         }
@@ -115,6 +124,7 @@ public class Database_Methods {
 
         void onFailure(String errorMessage);
     }
+
     public User getUserByID(String id){
         //get user by their id
         return null;
@@ -129,7 +139,72 @@ public class Database_Methods {
     }
     public void addPost(Post post){
         //add post to db
+        showToast("posting", context);
 
+        // Reference to the Firebase database
+        // Create a new user with a first and last name
+        Map<String, Object> postMp = new HashMap<>();
+        postMp.put(Constants.Key_P_Names, post.posterNames);
+        postMp.put(Constants.Key_P_Text, post.postTxt);
+        postMp.put(Constants.Key_Image_pp, post.posterPP);
+        postMp.put(Constants.Key_Poster_Id, post.posterId);
+        postMp.put(Constants.Key_Audience, post.audience);
+        if (post.postedPic != null) {
+            StorageReference storageRef = storage1.getReference();
+            StorageReference imagesRef = storageRef.child("images/"+ Constants.Key_Type_Image_PI +"/" + Uri.parse(post.postedPic).getLastPathSegment());
+            imagesRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                String image = uri.toString();
+                Log.d("ttrttrttrtrttrttrtrtrt", "123456789-0---" + image);
+
+                postMp.put(Constants.Key_Picture, image);
+
+                // Update the post data and save it to the database
+                savePostData(postMp);
+            }).addOnFailureListener(exception -> {
+                // Handle failure to get download URL
+                Log.e("TAG", "Failed to get download URL: " + exception.getMessage());
+                showToast("Failed to upload image" + exception.getMessage(), context);
+            });
+        } else {
+            postMp.put(Constants.Key_Picture, "");
+            Log.d("ttrttrttrtrttrttrtrtrt", "123456789-0--------''''");
+
+            // Update the post data and save it to the database
+            savePostData(postMp);
+        }
+
+    }
+    private void savePostData(Map<String, Object> postmp) {
+        postmp.put(Constants.Key_Post_Time, new Date());
+        postmp.put(Constants.Key_Likes, "0");
+        postmp.put(Constants.Key_Comments, "0");
+
+        postsCol.add(postmp).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                String generatedId = documentReference.getId(); // Get the Firestore-generated ID
+                // Add the generated ID as a field in the user data
+                postmp.put(Constants.Key_P_ID, generatedId);
+
+                // Update the document with the generated ID as a field
+                documentReference.update(postmp).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        showToast("posted", context);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        showToast("not posted" + e.getMessage(), context);
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                showToast("not opened"+e.getMessage(), context);
+            }
+        });
     }
     public List<Post> getAllChurchPosts(){
         //get all posts from church
@@ -169,6 +244,49 @@ public class Database_Methods {
     private void showToast(String mssg, Context context){
         Toast.makeText(context, mssg, Toast.LENGTH_SHORT).show();
     }
+    public void getImage(Uri imageString,FirestoreListenerGetImage listenerGetImage){
+        StorageReference storageRef = storage1.getReference();
+        StorageReference imagesRef = storageRef.child("images/"+ Constants.Key_Type_Image_PP +"/" + imageString.getLastPathSegment());
+        imagesRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            String image = uri.toString();
+            listenerGetImage.onSuccess(image);
+        }).addOnFailureListener(exception -> {
+            // Handle failure to get download URL
+            listenerGetImage.onFailure("image not found");
+        });
+    }
+    public interface FirestoreListenerGetImage {
+        void onSuccess(String image);
 
+        void onFailure(String errorMessage);
+    }
+    public void uploadAnImage(Uri uriFile, String type){
+
+        StorageReference storageRef = storage1.getReference();
+
+
+        StorageReference imagesRef = storageRef.child("images/"+ type +"/" + uriFile.getLastPathSegment());
+        Log.d("11111111111111111", "-----"+imagesRef);
+
+
+        UploadTask uploadTask  = imagesRef.putFile(uriFile);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+
+                Log.d("11111111111111111", "-----"+exception.toString());
+
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                Log.d("11111111111111111", "-----"+taskSnapshot);
+
+            }
+        });
+
+    }
 
 }

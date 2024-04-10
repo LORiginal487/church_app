@@ -70,6 +70,19 @@ public class activity_SignIn extends AppCompatActivity {
         });
     }
     private void openMain(User user){
+        managePreferences.putString(Constants.Key_Name, user.name);
+        managePreferences.putString(Constants.Key_Phone, user.phone);
+        managePreferences.putString(Constants.Key_Surname, user.surname);
+        managePreferences.putString(Constants.Key_Title, user.title);
+        managePreferences.putString(Constants.Key_Gender, user.gender);
+        managePreferences.putString(Constants.Key_Email, user.email);
+        managePreferences.putString(Constants.Key_Church, user.church);
+        managePreferences.putString(Constants.Key_BackgroundPic, user.bckGndP);
+        managePreferences.putString(Constants.Key_Bio, user.bio);
+        managePreferences.putString(Constants.Key_Id, user.idNum);
+        managePreferences.putString(Constants.Key_Role, user.role);
+        managePreferences.putString(Constants.Key_Image, user.image);
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

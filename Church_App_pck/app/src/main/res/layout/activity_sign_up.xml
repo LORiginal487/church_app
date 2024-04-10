@@ -60,7 +60,53 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_margin="15dp">
+        android:gravity="center_horizontal"
+        android:layout_margin="15dp"
+
+        android:paddingBottom="30dp">
+        <RelativeLayout
+            android:id="@+id/pPicPick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:clickable="true"
+            android:onClick="addApp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/rounded_sq_lg2"
+
+            >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="@drawable/rounded_sq_wh"
+
+            >
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/myPP"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="2dp"
+                android:visibility="gone"
+                android:rotation="90"
+                android:background="@drawable/circleback"
+                android:scaleType="centerCrop"
+                app:riv_oval="true" />
+        <TextView
+            android:id="@+id/addPPtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:text="@string/add_a_profile_picture"
+            android:textColor="@color/toDark"
+            android:background="@drawable/clear_bg"
+            />
+        </RelativeLayout>
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/nameRL"
             android:layout_width="match_parent"

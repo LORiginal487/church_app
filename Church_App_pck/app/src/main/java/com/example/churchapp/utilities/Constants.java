@@ -108,4 +108,10 @@ public class Constants {
     public static final String Key_None = "None";
     //public static final String Key_Mrs = "Audience";
 
+    public static final String Key_Audience_Public = "Public";
+    public static final String Key_Audience_Church = "Church Only";
+    public static final String Key_Type_Image_PI = "Post_Image";
+    public static final String Key_Type_Image_PP = "Profile_Picture";
+    public static final String Key_Type_Image_CT = "Chat_Image";
+
 }

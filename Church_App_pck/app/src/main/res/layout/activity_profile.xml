@@ -4,37 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light"
+    android:background="@color/toLight"
     tools:context=".activity_profile">
-    <LinearLayout
-        android:id="@+id/profileTop"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:background="@drawable/rounded_btm_sq_or"
-        app:layout_constraintHeight_percent=".3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
+            android:id="@+id/names"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="@string/user_name"
             android:textSize="30sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/mid"
+            app:layout_constraintHeight_percent=".05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <RelativeLayout
+        android:id="@+id/holdPics"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:onClick="addBackGround"
+        app:layout_constraintHeight_percent=".25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/names">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_background"
+            android:textSize="30sp"
+            android:textColor="@color/toLight"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"/>
+
         <ImageView
-            android:layout_margin="20dp"
+            android:id="@+id/image2bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:rotation="90" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/PP"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/user"/>
-    </LinearLayout>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circleback"
+            android:scaleType="centerCrop"
+            app:riv_oval="true" />
+
+    </RelativeLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintHeight_percent=".63"
-        app:layout_constraintTop_toBottomOf="@+id/profileTop">
+        app:layout_constraintTop_toBottomOf="@+id/holdPics">
         <TextView
             android:id="@+id/txLatestUpdate"
             android:layout_width="match_parent"
