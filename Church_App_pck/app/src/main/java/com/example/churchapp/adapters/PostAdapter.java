@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.churchapp.Listeners.LikesAndCommentListener;
 import com.example.churchapp.R;
+import com.example.churchapp.utilities.Constants;
+import com.example.churchapp.utilities.Database_Methods;
 import com.example.churchapp.utilities.ManagePreferences;
 import com.example.churchapp.utilities.Post;
 import com.example.churchapp.utilities.User;
@@ -31,11 +33,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private final List<Post> post;
     private final LikesAndCommentListener likesAndCommentListener;
     ManagePreferences managePreferences;
+    Database_Methods databaseMethods;
     FirebaseFirestore db;
     User user1;
     public PostAdapter(List<Post> post, LikesAndCommentListener likesAndCommentListener) {
         this.likesAndCommentListener = likesAndCommentListener;
         this.post = post;
+
     }
 
 
@@ -66,30 +70,71 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             this.itemView = itemView;
         }
         void setPostData(Post post) {
+            databaseMethods = new Database_Methods(itemView.getContext());
+            Log.d("3434343434343434343","--------------------1");
             TextView names = itemView.findViewById(R.id.posterName);
             names.setText(post.posterNames);
             TextView time = itemView.findViewById(R.id.timePosted);
+            TextView noImg = itemView.findViewById(R.id.noImage);
             time.setText(post.postTime);
             TextView txt = itemView.findViewById(R.id.txtPOSTED);
+            Log.d("3434343434343434343","--------------------2");
+
             txt.setText(post.postTxt);
             RoundedImageView imageProfile = itemView.findViewById(R.id.posterPP);
+            Glide.with(imageProfile.getContext()) // Pass the activity or fragment context
+                    .load(post.posterPP) // Load the image from the URL
+                    .into(imageProfile);
             ImageView postedImage = itemView.findViewById(R.id.picture);
-            if(post.postedPic != null){
-                Glide.with(itemView.getContext()) // Pass the activity or fragment context
+            if(!post.postedPic.isEmpty()){
+                noImg.setVisibility(View.GONE);
+                Glide.with(postedImage.getContext()) // Pass the activity or fragment context
                         .load(post.postedPic) // Load the image from the URL
                         .into(postedImage);
-            }else{
+                Log.d("3434343434343434343","--------------------3");
+
+            }else {
                 postedImage.setVisibility(View.GONE);
             }
+            postedImage.getRootView().setOnClickListener(v -> {
+                Log.d("6767575757557575765","--------------------7");
+
+                likesAndCommentListener.onPictureClick(post);
+            });
+            imageProfile.setOnClickListener(v -> {
+                Log.d("6767575757557575765","--------------------4");
+
+                databaseMethods.getUserByString(Constants.Key_Id, post.posterId, new Database_Methods.FirestoreListenerUser() {
+                            @Override
+                            public void onSuccess(User user) {
+                                Log.d("6767575757557575765","--------------------5");
+
+                                likesAndCommentListener.onPersonClicked(user);
+                                Log.d("6767575757557575765","--------------------6");
+
+                            }
+
+                            @Override
+                            public void onFailure(String errorMessage) {
+
+                            }
+                });
 
 
-            TextView deleteBtn = itemView.findViewById(R.id.deleteBtn);
-            TextView editBtn = itemView.findViewById(R.id.editbtn);
-            AppCompatImageView menuDots = itemView.findViewById(R.id.dots);
-            LinearLayoutCompat likeBtnL = itemView.findViewById(R.id.likeBtn);
-            LinearLayoutCompat commBtnL = itemView.findViewById(R.id.commentBtn);
-            LinearLayoutCompat menuPanel = itemView.findViewById(R.id.menuPanel);
-            managePreferences = new ManagePreferences(itemView.getContext());
+            });
+            names.setOnClickListener(v -> {
+                databaseMethods.getUserByString(Constants.Key_Id, post.posterId, new Database_Methods.FirestoreListenerUser() {
+                    @Override
+                    public void onSuccess(User user) {
+                        likesAndCommentListener.onPersonClicked(user);
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+
+                    }
+                });
+            });
 
 
         }

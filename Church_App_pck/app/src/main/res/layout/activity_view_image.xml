@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_View_Image">
+    <ImageView
+        android:id="@+id/imageShow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+
+        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/see_thru_1"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/text"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/names"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/light"
+            app:layout_constraintBottom_toTopOf="@+id/names"/>
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/names"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/churchDis"/>
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/churchDis"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

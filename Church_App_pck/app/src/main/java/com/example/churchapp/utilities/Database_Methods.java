@@ -2,6 +2,7 @@ package com.example.churchapp.utilities;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,9 +10,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.churchapp.CommentsLayout;
+import com.example.churchapp.Listeners.LikesAndCommentListener;
 import com.example.churchapp.MainActivity;
 import com.example.churchapp.activity_SignUp;
+import com.example.churchapp.adapters.PostAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -23,15 +28,20 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Database_Methods {
     private FirebaseFirestore db;
     private Context context;
     FirebaseStorage storage1;
+    StorageReference storageRef;
     CollectionReference usersCol, postsCol;
     public Database_Methods(Context context){
         this.context = context;
@@ -39,6 +49,7 @@ public class Database_Methods {
         storage1 = FirebaseStorage.getInstance();
         usersCol = db.collection(Constants.Key_Collection_Users);
         postsCol = db.collection(Constants.Key_Collection_Posts);
+        storageRef = storage1.getReference();
     }
     public void addUser(User user){
         //add user to db
@@ -124,6 +135,75 @@ public class Database_Methods {
 
         void onFailure(String errorMessage);
     }
+    public void getListOfPosts(String type, final FirestoreListenerUser listener){
+        //get user by their phone
+        usersCol.whereEqualTo("key", "value")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Pass the retrieved user to the listener
+                            User user = new User();
+                            user.name = document.getString(Constants.Key_Name);
+                            user.email = document.getString(Constants.Key_Email);
+                            user.phone = document.getString(Constants.Key_Phone);
+                            user.password = document.getString(Constants.Key_Password);
+                            user.church = document.getString(Constants.Key_Church);
+                            user.surname = document.getString(Constants.Key_Surname);
+                            user.role = document.getString(Constants.Key_Role);
+                            user.gender = document.getString(Constants.Key_Gender);
+                            user.title = document.getString(Constants.Key_Title);
+                            user.bio = document.getString(Constants.Key_Bio);
+                            user.bckGndP = document.getString(Constants.Key_BackgroundPic);
+                            user.image = document.getString(Constants.Key_Image);
+                            user.idNum = document.getString(Constants.Key_Id);
+                            listener.onSuccess(user);
+                        }
+                    } else {
+                        Log.d("TAG", "Error getting user: ", task.getException());
+                        listener.onFailure("Error getting user reTry");
+                    }
+                });
+
+    }
+    public interface FirestoreListenerPosts {
+        void onSuccess(List<Post> posts);
+
+        void onFailure(String errorMessage);
+    }
+    public void letsTestAdapter(RecyclerView recyclerView){
+        Log.d("3434343434343434343","--------------------001");
+
+        postsCol.get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        List<Post> posts = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Pass the retrieved user to the listener
+                            Post post = new Post();
+                            post.posterNames = document.getString(Constants.Key_P_Names);
+                            post.posterPP = document.getString(Constants.Key_Image_pp);
+                            post.postedPic = document.getString(Constants.Key_Picture);
+                            post.postTime = getRedableDate(document.getDate(Constants.Key_Post_Time));
+                            post.postTxt = document.getString(Constants.Key_P_Text);
+                            post.postID = document.getString(Constants.Key_P_ID);
+                            post.posterId = document.getString(Constants.Key_Poster_Id);
+                            post.audience = document.getString(Constants.Key_Audience);
+                            posts.add(post);
+                            Log.d("3434343434343434343","--------------------01");
+
+                        }
+                        PostAdapter postAdapter = new PostAdapter(posts, (LikesAndCommentListener) recyclerView.getContext());
+                        Log.d("3434343434343434343","--------------------10");
+
+                        recyclerView.setAdapter(postAdapter);
+
+                    } else {
+                        Log.d("TAG", "Error getting user: ", task.getException());
+
+                    }
+                });
+    }
 
     public User getUserByID(String id){
         //get user by their id
@@ -150,8 +230,8 @@ public class Database_Methods {
         postMp.put(Constants.Key_Poster_Id, post.posterId);
         postMp.put(Constants.Key_Audience, post.audience);
         if (post.postedPic != null) {
-            StorageReference storageRef = storage1.getReference();
-            StorageReference imagesRef = storageRef.child("images/"+ Constants.Key_Type_Image_PI +"/" + Uri.parse(post.postedPic).getLastPathSegment());
+
+            StorageReference imagesRef = storageRef.child(fileStoragePath(Constants.Key_Type_Image_PI) + Uri.parse(post.postedPic).getLastPathSegment());
             imagesRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 String image = uri.toString();
                 Log.d("ttrttrttrtrttrttrtrtrt", "123456789-0---" + image);
@@ -159,7 +239,7 @@ public class Database_Methods {
                 postMp.put(Constants.Key_Picture, image);
 
                 // Update the post data and save it to the database
-                savePostData(postMp);
+                savePostData(postMp, post);
             }).addOnFailureListener(exception -> {
                 // Handle failure to get download URL
                 Log.e("TAG", "Failed to get download URL: " + exception.getMessage());
@@ -170,11 +250,11 @@ public class Database_Methods {
             Log.d("ttrttrttrtrttrttrtrtrt", "123456789-0--------''''");
 
             // Update the post data and save it to the database
-            savePostData(postMp);
+            savePostData(postMp, post);
         }
 
     }
-    private void savePostData(Map<String, Object> postmp) {
+    private void savePostData(Map<String, Object> postmp, Post post) {
         postmp.put(Constants.Key_Post_Time, new Date());
         postmp.put(Constants.Key_Likes, "0");
         postmp.put(Constants.Key_Comments, "0");
@@ -191,6 +271,9 @@ public class Database_Methods {
                     @Override
                     public void onSuccess(Void unused) {
                         showToast("posted", context);
+                        Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -206,6 +289,9 @@ public class Database_Methods {
             }
         });
     }
+    private String getRedableDate(Date date){
+        return new SimpleDateFormat("HH:mm - dd/MM/yyyy", Locale.getDefault()).format(date);
+    }
     public List<Post> getAllChurchPosts(){
         //get all posts from church
         return null;
@@ -218,6 +304,7 @@ public class Database_Methods {
         //get all posts that are public
         return null;
     }
+
     public Post getPostByID(String postId){
         //get a post by its id
         return null;
@@ -245,8 +332,7 @@ public class Database_Methods {
         Toast.makeText(context, mssg, Toast.LENGTH_SHORT).show();
     }
     public void getImage(Uri imageString,FirestoreListenerGetImage listenerGetImage){
-        StorageReference storageRef = storage1.getReference();
-        StorageReference imagesRef = storageRef.child("images/"+ Constants.Key_Type_Image_PP +"/" + imageString.getLastPathSegment());
+        StorageReference imagesRef = storageRef.child(fileStoragePath(Constants.Key_Type_Image_PP) + imageString.getLastPathSegment());
         imagesRef.getDownloadUrl().addOnSuccessListener(uri -> {
             String image = uri.toString();
             listenerGetImage.onSuccess(image);
@@ -260,12 +346,15 @@ public class Database_Methods {
 
         void onFailure(String errorMessage);
     }
+    public String fileStoragePath(String type){
+        return "images/"+ type +"/";
+    }
     public void uploadAnImage(Uri uriFile, String type){
 
         StorageReference storageRef = storage1.getReference();
 
 
-        StorageReference imagesRef = storageRef.child("images/"+ type +"/" + uriFile.getLastPathSegment());
+        StorageReference imagesRef = storageRef.child(fileStoragePath(type) + uriFile.getLastPathSegment());
         Log.d("11111111111111111", "-----"+imagesRef);
 
 
@@ -283,6 +372,7 @@ public class Database_Methods {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 Log.d("11111111111111111", "-----"+taskSnapshot);
+                showToast("pic picked", context);
 
             }
         });

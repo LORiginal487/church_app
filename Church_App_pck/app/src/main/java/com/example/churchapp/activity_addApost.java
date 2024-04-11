@@ -17,13 +17,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.churchapp.utilities.Constants;
 import com.example.churchapp.utilities.Database_Methods;
+import com.example.churchapp.utilities.ManagePreferences;
 import com.example.churchapp.utilities.Post;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.Serializable;
 
 public class activity_addApost extends AppCompatActivity {
     TextView names,errortxt;
@@ -32,6 +35,7 @@ public class activity_addApost extends AppCompatActivity {
     String fullName, pp,imagePosted, postText, postaID, audience = null;
     RoundedImageView imageViewPP;
     Database_Methods databaseMethods;
+    ManagePreferences managePreferences;
     ImageView pic2post;
     Uri imageUri2;
     Boolean addImage = false;
@@ -41,12 +45,28 @@ public class activity_addApost extends AppCompatActivity {
         setContentView(R.layout.activity_add_apost);
 
         //_____------
-        callViews();
+
         databaseMethods = new Database_Methods(getApplicationContext());
+        managePreferences = new ManagePreferences(getApplicationContext());
+        callViews();
+
     }
     private void callViews(){
         names = findViewById(R.id.namedis);
+        char initial;
+        String name2,surname, title;
+        name2 =managePreferences.getString(Constants.Key_Name).toUpperCase();
+        initial = name2.charAt(0);
+        surname = managePreferences.getString(Constants.Key_Surname).toUpperCase();
+        title = managePreferences.getString(Constants.Key_Title).toUpperCase();
+        Log.d("333333333333444", "-----"+name2);
+        names.setText(title+" "+initial+" "+surname);
         text2post = findViewById(R.id.inText);
+        imageViewPP = findViewById(R.id.posterPP);
+        Glide.with(imageViewPP.getContext()) // Pass the activity or fragment context
+                .load(managePreferences.getString(Constants.Key_Image)) // Load the image from the URL
+                .into(imageViewPP);
+
         defaultAd = findViewById(R.id.defaultAd);
         churchAd = findViewById(R.id.churchAd);
         publicAd = findViewById(R.id.publicAd);
@@ -115,18 +135,21 @@ public class activity_addApost extends AppCompatActivity {
             if(writtenSomething()){
                 errortxt.setVisibility(View.GONE);
                 Post post = new Post();
-                post.posterNames = fullName;
-                post.posterPP = pp;
-                post.posterId = postaID;
+                String title2 = managePreferences.getString(Constants.Key_Title);
+                String name2 = managePreferences.getString(Constants.Key_Name).toUpperCase();
+                String surname2 = managePreferences.getString(Constants.Key_Surname).toUpperCase();
+                post.posterNames = title2+" "+name2.charAt(0)+" "+surname2;
+                post.posterId = managePreferences.getString(Constants.Key_Id);
+                post.posterPP = managePreferences.getString(Constants.Key_Image);
                 post.audience = audience;
-                post.postTxt = postText;
+                post.postTxt = text2post.getText().toString();
                 if(addImage){
                     post.postedPic = imageUri2.toString();
                 }else{
                     post.postedPic = null;
                 }
                 databaseMethods.addPost(post);
-                OpenHome(view);
+                //OpenHome(view);
             }else{
                 errortxt.setVisibility(View.VISIBLE);
                 errortxt.setText("Please write Something");

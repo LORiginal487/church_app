@@ -19,6 +19,12 @@
             android:name=".activity_Notifications"
             android:exported="false" />
         <activity
+            android:name=".activity_View_Image"
+            android:exported="false" />
+        <activity
+            android:name=".CommentsLayout"
+            android:exported="false" />
+        <activity
             android:name=".RolePicker"
             android:exported="false" />
         <activity

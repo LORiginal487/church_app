@@ -45,79 +45,88 @@
              />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
+    <ScrollView
         android:id="@+id/home_M_L"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_T_L"
         app:layout_constraintHeight_percent="0.86"
-        tools:layout_editor_absoluteX="1dp">
+        >
+        <LinearLayout
 
-        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/rounded_sq_wh">
-            <ImageView
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            tools:layout_editor_absoluteX="1dp">
+
+            <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/picture"/>
+                android:layout_height="250dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_sq_wh">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/picture"/>
+
+            </RelativeLayout>
 
             <TextView
+                android:id="@+id/txLatestUpdate"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom|center_horizontal"
-                android:text="@string/welcome"
-                android:textColor="@color/mid"
-                android:textSize="50sp" />
-        </RelativeLayout>
-        <TextView
-            android:id="@+id/txLatestUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/recenty_posted"
-            android:layout_margin="10dp"
-            android:textSize="20sp"
-            android:textColor="@color/dark"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:id="@+id/rvLatestUpdate"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-        <TextView
-            android:id="@+id/txMostLiked"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/most_liked_posts"
-            android:layout_margin="10dp"
-            android:textSize="20sp"
-            android:textColor="@color/dark"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:id="@+id/rvMostLiked"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-        <TextView
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/recenty_posted"
+                android:paddingStart="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/dark"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/toLight"
+                android:visibility="gone"
+                android:layout_margin="5dp"/>
+            <androidx.recyclerview.widget.RecyclerView
 
-            android:id="@+id/txYourFavs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/your_favs"
-            android:layout_margin="10dp"
-            android:textSize="20sp"
-            android:textColor="@color/dark"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:id="@+id/rvYourFavs"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rvLatestUpdate"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:layout_marginBottom="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            <View
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="1dp"
+                android:background="@color/toLight"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:id="@+id/txMostLiked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Public Post"
+                android:paddingStart="10dp"                android:textSize="20sp"
+                android:textColor="@color/dark"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/toLight"
+                android:layout_margin="5dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:id="@+id/rvPublicPosts"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/home_B_L"

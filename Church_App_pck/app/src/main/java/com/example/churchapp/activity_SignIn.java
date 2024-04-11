@@ -83,6 +83,7 @@ public class activity_SignIn extends AppCompatActivity {
         managePreferences.putString(Constants.Key_Role, user.role);
         managePreferences.putString(Constants.Key_Image, user.image);
 
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

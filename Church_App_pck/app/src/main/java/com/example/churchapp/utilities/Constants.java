@@ -113,5 +113,7 @@ public class Constants {
     public static final String Key_Type_Image_PI = "Post_Image";
     public static final String Key_Type_Image_PP = "Profile_Picture";
     public static final String Key_Type_Image_CT = "Chat_Image";
+    public static final String Key_Type_Post_Recent = "Recent_Posts";
+    public static final String Key_Type_Post_Public = "Public_Posts";
 
 }

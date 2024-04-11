@@ -32,17 +32,38 @@
             app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toEndOf="@+id/backLogo2"
             app:layout_constraintTop_toTopOf="parent"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        android:onClick="post"
+        android:background="@drawable/intextbox"
+        app:layout_constraintEnd_toEndOf="@+id/addPicsHolda"
+        app:layout_constraintTop_toBottomOf="@id/addPicsHolda"
+        >
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/addNote"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:clickable="true"
-            android:onClick="post"
-            android:src="@drawable/plusosmall"
+
+            android:src="@drawable/anglesmallrighttt"
+            android:layout_marginStart="20dp"
             android:tint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/post"
+            android:textColor="@color/white"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
     <View
         android:id="@+id/line1"
         android:layout_width="match_parent"
@@ -76,9 +97,8 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/posterPP"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="5dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_margin="10dp"
         android:background="@drawable/circleback"
         android:scaleType="centerCrop"
@@ -102,6 +122,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:padding="2dp"
         android:background="@drawable/intextbox"
         app:layout_constraintStart_toEndOf="@id/posterPP"
@@ -120,7 +141,7 @@
                 android:layout_height="match_parent"
                 android:clickable="true"
                 android:onClick="post"
-                android:src="@drawable/peopleroof"
+                android:src="@drawable/userspplt"
                 android:tint="@color/white"
                 />
             <TextView
@@ -154,7 +175,7 @@
                 android:id="@+id/icon3"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/peopleroof"
+                android:src="@drawable/world"
                 android:tint="@color/white"
                 />
             <TextView
@@ -197,27 +218,28 @@
     </LinearLayout>
     <EditText
         android:id="@+id/inText"
-        android:layout_width="match_parent"
+        android:layout_width="380dp"
         android:layout_height="200dp"
         android:hint="@string/what_do_you_wanna_say"
         android:textSize="26sp"
         android:textColorHint="@color/white"
         android:textColor="@color/light"
+        android:layout_marginTop="5dp"
         android:gravity="start"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/audienceRD"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/inText"
-        app:layout_constraintStart_toStartOf="parent">
+
     <LinearLayout
         android:id="@+id/addPicsHolda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@id/inText"
+        app:layout_constraintStart_toStartOf="parent">
         <LinearLayout
             android:id="@+id/addPicturesBTNd"
             android:layout_width="wrap_content"
@@ -284,8 +306,9 @@
             android:layout_width="380dp"
             android:layout_height="380dp"
             android:layout_margin="2dp"
+            android:visibility="gone"
             android:rotation="90" />
     </LinearLayout>
-    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

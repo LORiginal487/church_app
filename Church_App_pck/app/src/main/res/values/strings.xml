@@ -55,4 +55,7 @@
     <string name="change_photo">Change Photo</string>
     <string name="add_a_profile_picture">Add A Profile Picture</string>
     <string name="add_background">Add Background</string>
+    <string name="defaultText">----------</string>
+    <string name="post">Post</string>
+    <string name="no_photo_video">No Photo/Video</string>
 </resources>

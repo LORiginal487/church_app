@@ -35,7 +35,9 @@ public class activity_profile extends AppCompatActivity {
         pp = findViewById(R.id.PP);
     }
     private void ownUserDetails(){
-        names.setText(managePreferences.getString(Constants.Key_Name)+" "+managePreferences.getString(Constants.Key_Surname));
+        String name = managePreferences.getString(Constants.Key_Name).toUpperCase();
+        String surname = managePreferences.getString(Constants.Key_Surname).toUpperCase();
+        names.setText(name +" "+ surname);
         Glide.with(pp.getContext()) // Pass the activity or fragment context
                 .load(managePreferences.getString(Constants.Key_Image)) // Load the image from the URL
                 .into(pp);
