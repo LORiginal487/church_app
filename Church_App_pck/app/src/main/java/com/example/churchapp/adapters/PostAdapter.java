@@ -93,9 +93,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                         .into(postedImage);
                 Log.d("3434343434343434343","--------------------3");
 
-            }else {
-                postedImage.setVisibility(View.GONE);
             }
+            
             postedImage.getRootView().setOnClickListener(v -> {
                 Log.d("6767575757557575765","--------------------7");
 
