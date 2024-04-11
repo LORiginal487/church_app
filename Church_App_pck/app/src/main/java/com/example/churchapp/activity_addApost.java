@@ -75,21 +75,31 @@ public class activity_addApost extends AppCompatActivity {
 
     }
     public void openAudience(View view) {
+        audience=null;
         defaultAd.setVisibility(View.GONE);
         churchAd.setVisibility(View.VISIBLE);
         publicAd.setVisibility(View.VISIBLE);
     }
 
     public void setPublic(View view) {
-        churchAd.setVisibility(View.GONE);
-        publicAd.setVisibility(View.VISIBLE);
-        audience = Constants.Key_Audience_Public;
+        if(churchAd.getVisibility() == View.GONE){
+            openAudience(view);
+        }else {
+            churchAd.setVisibility(View.GONE);
+            publicAd.setVisibility(View.VISIBLE);
+            audience = Constants.Key_Audience_Public;
+        }
     }
 
     public void setChurch(View view) {
-        churchAd.setVisibility(View.VISIBLE);
-        publicAd.setVisibility(View.GONE);
-        audience = Constants.Key_Audience_Church;
+        if(publicAd.getVisibility() == View.GONE){
+            openAudience(view);
+        }else {
+
+            churchAd.setVisibility(View.VISIBLE);
+            publicAd.setVisibility(View.GONE);
+            audience = Constants.Key_Audience_Church;
+        }
     }
 
     public void addPhoto(View view) {
