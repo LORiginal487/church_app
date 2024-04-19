@@ -10,7 +10,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -63,8 +65,38 @@ public class activity_SignUp extends AppCompatActivity {
         callViews();
         Log.d("l4 1111111", "_______________4");
         radioButtons();
+        churchNameActions();
         Log.d("l4 1111111", "_______________6");
     }
+
+    private void churchNameActions() {
+        church_in.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(role.isEmpty()){
+                    showError("Please Select A Role");
+                }else if(role == Constants.Key_Member){
+
+                }else{
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+    private void showChurches(){
+
+    }
+
     private void callViews(){
         name_in = findViewById(R.id.nameIn);
         surname_in = findViewById(R.id.surnameIn);
@@ -141,8 +173,7 @@ public class activity_SignUp extends AppCompatActivity {
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    errorSU.setVisibility(View.VISIBLE);
-                    errorSU.setText(errorMessage);
+                    showError(errorMessage);
 
                 }
             });
@@ -154,6 +185,10 @@ public class activity_SignUp extends AppCompatActivity {
 
 
 
+    }
+    private void showError(String mssg){
+        errorSU.setVisibility(View.VISIBLE);
+        errorSU.setText(mssg);
     }
     private boolean available(){
 
